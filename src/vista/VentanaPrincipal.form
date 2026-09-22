@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="vista.VentanaPrincipal">
-  <grid id="27dc6" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="5" left="5" bottom="5" right="5"/>
     <constraints>
       <xy x="20" y="20" width="740" height="490"/>
@@ -185,6 +185,31 @@
           </component>
         </children>
       </grid>
+      <!-- 3. ZONA LISTADO (Abajo) -->
+      <component id="scrollPaneComp" class="javax.swing.JScrollPane" binding="scrollPane">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="etched" title="Listado de Productos"/>
+        <children>
+          <component id="tablaProductosComp" class="javax.swing.JTable" binding="tablaProductos">
+            <constraints>
+              <xy x="20" y="20" width="500" height="400"/>
+            </constraints>
+            <properties>
+              <model>
+                <column title="Código"/>
+                <column title="Nombre"/>
+                <column title="Categoría"/>
+                <column title="Precio"/>
+                <column title="Stock"/>
+                <column title="Estado"/>
+              </model>
+            </properties>
+          </component>
+        </children>
+      </component>
     </children>
   </grid>
 </form>

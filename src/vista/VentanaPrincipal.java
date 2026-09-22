@@ -1,6 +1,7 @@
 package vista;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class VentanaPrincipal extends JFrame {
@@ -21,6 +22,11 @@ public class VentanaPrincipal extends JFrame {
     public JButton btnBuscar;
     public JButton btnBajoStock;
     public JTextField txtBuscar;
+
+    // 3. Zona Listado
+    public JTable tablaProductos;
+    public DefaultTableModel modeloTabla;
+    public JScrollPane scrollPane;
 
     public VentanaPrincipal() {
         setTitle("Gestión de Productos");
@@ -105,6 +111,16 @@ public class VentanaPrincipal extends JFrame {
         panelAcciones.add(btnBajoStock);
 
         panelSuperior.add(panelAcciones, BorderLayout.SOUTH);
+
+        // --- 3. ZONA LISTADO (Abajo) ---
+        String[] columnas = {"Código", "Nombre", "Categoría", "Precio", "Stock", "Estado"};
+        modeloTabla = new DefaultTableModel(columnas, 0);
+        tablaProductos = new JTable(modeloTabla);
+
+        // JTable siempre dentro de JScrollPane para barra y cabecera
+        scrollPane = new JScrollPane(tablaProductos);
+        scrollPane.setBorder(BorderFactory.createTitledBorder("Listado de Productos"));
+        add(scrollPane, BorderLayout.CENTER);
     }
 
     public static void main(String[] args) {
