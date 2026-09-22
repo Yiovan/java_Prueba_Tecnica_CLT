@@ -70,7 +70,7 @@
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Precio"/>
+              <text value="Precio (Gs)"/>
             </properties>
           </component>
           <component id="txtPrecioField" class="javax.swing.JTextField" binding="txtPrecio">
@@ -202,7 +202,7 @@
                 <column title="Código"/>
                 <column title="Nombre"/>
                 <column title="Categoría"/>
-                <column title="Precio"/>
+                <column title="Precio (Gs)"/>
                 <column title="Stock"/>
                 <column title="Estado"/>
               </model>

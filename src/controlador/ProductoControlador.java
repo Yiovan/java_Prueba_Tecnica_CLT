@@ -3,7 +3,6 @@ package controlador;
 import dao.ProductoDAO;
 import modelo.Producto;
 
-import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -57,10 +56,8 @@ public class ProductoControlador {
             throw new IllegalArgumentException("Código es obligatorio");
         if (p.getNombre() == null || p.getNombre().isBlank())
             throw new IllegalArgumentException("Nombre es obligatorio");
-        if (p.getPrecio() == null)
-            throw new IllegalArgumentException("Precio es obligatorio");
-        if (p.getPrecio().compareTo(BigDecimal.ZERO) <= 0)
-            throw new IllegalArgumentException("Precio debe ser mayor a 0");
+        if (p.getPrecio() <= 0)
+            throw new IllegalArgumentException("Precio debe ser mayor a 0 (Gs)");
         if (p.getStock() < 0)
             throw new IllegalArgumentException("Stock no puede ser negativo");
         if (p.getCodigo().length() > 50)
@@ -80,11 +77,13 @@ public class ProductoControlador {
         String nom = nombre != null ? nombre.trim() : "";
         String cat = categoria != null ? categoria.trim() : "";
         if (cat.isEmpty()) cat = null;
-        BigDecimal precio;
+        int precio;
         try {
-            precio = new BigDecimal(precioStr.trim());
+            // Permite Gs con puntos o comas como separador de miles (ej: 1.500.000)
+            String clean = precioStr.trim().replace(".", "").replace(",", "").replace(" ", "");
+            precio = Integer.parseInt(clean);
         } catch (Exception e) {
-            throw new IllegalArgumentException("Precio inválido: " + precioStr);
+            throw new IllegalArgumentException("Precio inválido (Gs, entero): " + precioStr);
         }
         int stock;
         try {

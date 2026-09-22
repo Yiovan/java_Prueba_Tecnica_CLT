@@ -92,7 +92,7 @@ public class VentanaPrincipal extends JFrame {
         panelFormulario.add(txtCategoria, gbc);
 
         gbc.gridx = 0; gbc.gridy = 3;
-        panelFormulario.add(new JLabel("Precio *"), gbc);
+        panelFormulario.add(new JLabel("Precio (Gs) *"), gbc);
         gbc.gridx = 1;
         panelFormulario.add(txtPrecio, gbc);
 
@@ -145,13 +145,13 @@ public class VentanaPrincipal extends JFrame {
         panelSuperior.add(panelAcciones, BorderLayout.SOUTH);
 
         // --- 3. ZONA LISTADO (Abajo) ---
-        String[] columnas = {"ID", "Código", "Nombre", "Categoría", "Precio", "Stock", "Estado"};
+        String[] columnas = {"ID", "Código", "Nombre", "Categoría", "Precio (Gs)", "Stock", "Estado"};
         modeloTabla = new DefaultTableModel(columnas, 0) {
             @Override
             public boolean isCellEditable(int row, int column) { return false; }
             @Override
             public Class<?> getColumnClass(int columnIndex) {
-                if (columnIndex == 5) return Integer.class;
+                if (columnIndex == 4 || columnIndex == 5) return Integer.class;
                 return String.class;
             }
         };
@@ -204,6 +204,10 @@ public class VentanaPrincipal extends JFrame {
         }
     }
 
+    private String formatGs(int precio) {
+        return String.format("%,d", precio).replace(",", ".");
+    }
+
     private void mostrarLista(List<Producto> lista) {
         this.productosEnTabla = lista;
         modeloTabla.setRowCount(0);
@@ -213,7 +217,7 @@ public class VentanaPrincipal extends JFrame {
                     p.getCodigo(),
                     p.getNombre(),
                     p.getCategoria() != null ? p.getCategoria() : "",
-                    p.getPrecio() != null ? p.getPrecio().toPlainString() : "",
+                    p.getPrecio(),
                     p.getStock(),
                     p.getEstado()
             });
@@ -243,7 +247,7 @@ public class VentanaPrincipal extends JFrame {
         txtCodigo.setText(p.getCodigo());
         txtNombre.setText(p.getNombre());
         txtCategoria.setText(p.getCategoria() != null ? p.getCategoria() : "");
-        txtPrecio.setText(p.getPrecio() != null ? p.getPrecio().toPlainString() : "");
+        txtPrecio.setText(String.valueOf(p.getPrecio()));
         txtStock.setText(String.valueOf(p.getStock()));
         cboEstado.setSelectedItem(p.getEstado());
     }

@@ -3,7 +3,6 @@ package dao;
 import config.Conexion;
 import modelo.Producto;
 
-import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,7 @@ public class ProductoDAO {
         p.setCodigo(rs.getString("codigo"));
         p.setNombre(rs.getString("nombre"));
         p.setCategoria(rs.getString("categoria"));
-        p.setPrecio(rs.getBigDecimal("precio"));
+        p.setPrecio(rs.getInt("precio"));
         p.setStock(rs.getInt("stock"));
         p.setEstado(rs.getString("estado"));
         return p;
@@ -110,7 +109,7 @@ public class ProductoDAO {
             ps.setString(1, p.getCodigo());
             ps.setString(2, p.getNombre());
             ps.setString(3, p.getCategoria());
-            ps.setBigDecimal(4, p.getPrecio());
+            ps.setInt(4, p.getPrecio());
             ps.setInt(5, p.getStock());
             ps.setString(6, p.getEstado());
             ps.executeUpdate();
@@ -127,7 +126,7 @@ public class ProductoDAO {
             ps.setString(1, p.getCodigo());
             ps.setString(2, p.getNombre());
             ps.setString(3, p.getCategoria());
-            ps.setBigDecimal(4, p.getPrecio());
+            ps.setInt(4, p.getPrecio());
             ps.setInt(5, p.getStock());
             ps.setString(6, p.getEstado());
             ps.setInt(7, p.getId());

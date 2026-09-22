@@ -62,7 +62,7 @@ Reglas: mensajes con `JOptionPane`, refresco inmediato de tabla, persistencia JD
 
 ## Validaciones
 - Código/Nombre requeridos, máx 50/100 chars
-- Precio `BigDecimal` >0
+- Precio `int` en Gs sin decimales >0 (acepta puntos de miles ej: 1.500.000)
 - Stock `int` >=0
 - Estado Activo/Inactivo
 - Duplicados por `codigo UNIQUE`
