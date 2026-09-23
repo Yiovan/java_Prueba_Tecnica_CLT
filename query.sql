@@ -13,9 +13,3 @@ CREATE TABLE IF NOT EXISTS productos (
      CONSTRAINT chk_stock CHECK (stock >= 0)
 );
 
--- Datos de prueba (Gs, sin decimales)
-INSERT IGNORE INTO productos (codigo, nombre, categoria, precio, stock, estado) VALUES
-('P001', 'Laptop Lenovo', 'Electronica', 7500000, 15, 'Activo'),
-('P002', 'Mouse Logitech', 'Electronica', 150000, 3, 'Activo'),
-('P003', 'Teclado Mecánico', 'Electronica', 450000, 8, 'Activo'),
-('P004', 'Silla Oficina', 'Muebles', 1200000, 2, 'Activo');
