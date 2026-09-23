@@ -69,3 +69,17 @@ Reglas: mensajes con `JOptionPane`, refresco inmediato de tabla, persistencia JD
 
 ## Git
 Historial en `main` con commits incrementales por capa.
+
+## Arquitectura (capas)
+
+| Capa | Archivo | Qué hace | Método clave |
+|---|---|---|---|
+| Entry | `src/Main.java` | Pone Nimbus y abre la ventana en EDT | `main:5` |
+| Config | `src/config/Conexion.java` | Lee `.env`, exige `DB_PASSWORD`, arma URL JDBC | `conectar:38` |
+| Modelo | `src/modelo/Producto.java` | POJO 7 atributos + get/set. Sin lógica | `get/set:28-47` |
+| DAO | `src/dao/ProductoDAO.java` | Único con SQL. PreparedStatement + try-with-resources. CRUD, buscar, bajo stock, ajustar stock atómico | `listar:26`, `ajustarStock:146` |
+| Controlador | `src/controlador/ProductoControlador.java` | Valida 8 reglas, verifica duplicados, parsea `1.500.000->1500000` | `validar:54`, `construirDesdeFormulario:75` |
+| Vista | `src/vista/VentanaPrincipal.java` | Única pantalla: form + acciones + tabla. Delega todo al controlador | `guardar:255`, `seleccionarFila:240` |
+
+**Flujo:** Vista -> Controlador (valida) -> DAO (SQL) -> Conexion (JDBC) -> MySQL.
+`Conexion` solo abre; el DAO cierra con try-with-resources.
