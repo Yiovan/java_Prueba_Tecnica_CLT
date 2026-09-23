@@ -18,15 +18,15 @@ src/
   vista/VentanaPrincipal.java
 query.sql
 docker-compose.yml
-.env
+.env.example -> .env (copiar)
+lib/ (mysql-connector, dotenv, protobuf)
 ```
 
 ## Configuración
-1. Copiar `.env` (ya incluido):
-```
-DB_PASSWORD=root
-DB_NAME=gestion_productos
-DB_PORT=3306
+1. Crear `.env` desde plantilla (no se versiona `.env`):
+```bash
+cp .env.example .env
+# editar si necesitas: DB_PASSWORD, DB_NAME, DB_PORT, DB_HOST
 ```
 2. Levantar BD:
 ```bash
